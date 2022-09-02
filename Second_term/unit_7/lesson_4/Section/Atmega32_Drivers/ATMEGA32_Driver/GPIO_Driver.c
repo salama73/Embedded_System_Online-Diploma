@@ -1,8 +1,8 @@
 ﻿/*
  * GPIO_Driver.c
  *
- * Created: 30/08/2022 08:02:57 م
- *  Author: elmnshawy
+ * Created: 30/08/2022 
+ * Author: Salama mohamed
  */ 
 
 #include "GPIO_Driver.h"

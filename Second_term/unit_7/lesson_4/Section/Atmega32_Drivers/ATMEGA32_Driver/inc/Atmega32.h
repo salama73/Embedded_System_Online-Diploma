@@ -1,8 +1,8 @@
 ﻿/*
  * Atmega32.h
  *
- * Created: 30/08/2022 08:25:37 م
- *  Author: elmnshawy
+ * Created: 30/08/2022 
+ * Author: Salama mohamed
  */ 
 
 
