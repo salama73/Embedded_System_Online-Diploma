@@ -1,0 +1,3 @@
+main.c:29:6:Clock_INIT	4	static
+main.c:38:7:USART1_IRQ_Call	8	static
+main.c:44:5:main	24	static
