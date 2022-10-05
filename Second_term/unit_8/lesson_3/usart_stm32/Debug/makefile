@@ -47,8 +47,8 @@ Drivers.bin \
 all: Drivers.elf secondary-outputs
 
 # Tool invocations
-Drivers.elf: $(OBJS) $(USER_OBJS) C:\Users\elmnshawy\STM32CubeIDE\workspace_1.4.0\Drivers\STM32F103C6TX_FLASH.ld
-	arm-none-eabi-gcc -gdwarf-2 -o "Drivers.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\elmnshawy\STM32CubeIDE\workspace_1.4.0\Drivers\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Drivers.elf: $(OBJS) $(USER_OBJS) D:\Deploma\ Assignment\Deploma\ Assignment_Code\Second_term\unit_8\lesson_3\usart_stm32\STM32F103C6TX_FLASH.ld
+	arm-none-eabi-gcc -gdwarf-2 -o "Drivers.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\Deploma Assignment\Deploma Assignment_Code\Second_term\unit_8\lesson_3\usart_stm32\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Drivers.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
