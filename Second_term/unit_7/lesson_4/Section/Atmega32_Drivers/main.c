@@ -11,6 +11,7 @@
 #include "LCD.h"
 
 int flag =1;
+
 void GPIO_init (void)
 {
 	GPIO_Pinconfig_t config ;

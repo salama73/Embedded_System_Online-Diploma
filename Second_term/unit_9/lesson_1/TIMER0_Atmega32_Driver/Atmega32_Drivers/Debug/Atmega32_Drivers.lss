@@ -1,0 +1,921 @@
+
+Atmega32_Drivers.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000005e8  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  0000065c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000014  00800060  00800060  0000065c  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  0000065c  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000068c  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000268  00000000  00000000  000006c8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00002050  00000000  00000000  00000930  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000fc0  00000000  00000000  00002980  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000016ec  00000000  00000000  00003940  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000008b4  00000000  00000000  0000502c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000c80  00000000  00000000  000058e0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000151e  00000000  00000000  00006560  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 000001e8  00000000  00000000  00007a7e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__vector_1>
+   8:	0c 94 65 00 	jmp	0xca	; 0xca <__vector_2>
+   c:	0c 94 8c 00 	jmp	0x118	; 0x118 <__vector_3>
+  10:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  14:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  18:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  1c:	0c 94 34 01 	jmp	0x268	; 0x268 <__vector_7>
+  20:	0c 94 5e 01 	jmp	0x2bc	; 0x2bc <__vector_8>
+  24:	0c 94 0a 01 	jmp	0x214	; 0x214 <__vector_9>
+  28:	0c 94 03 02 	jmp	0x406	; 0x406 <__vector_10>
+  2c:	0c 94 2d 02 	jmp	0x45a	; 0x45a <__vector_11>
+  30:	0c 94 88 01 	jmp	0x310	; 0x310 <__vector_12>
+  34:	0c 94 57 02 	jmp	0x4ae	; 0x4ae <__vector_13>
+  38:	0c 94 7e 02 	jmp	0x4fc	; 0x4fc <__vector_14>
+  3c:	0c 94 a5 02 	jmp	0x54a	; 0x54a <__vector_15>
+  40:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  44:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  48:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  4c:	0c 94 e0 00 	jmp	0x1c0	; 0x1c0 <__vector_19>
+  50:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_clear_bss>:
+  60:	20 e0       	ldi	r18, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	01 c0       	rjmp	.+2      	; 0x6a <.do_clear_bss_start>
+
+00000068 <.do_clear_bss_loop>:
+  68:	1d 92       	st	X+, r1
+
+0000006a <.do_clear_bss_start>:
+  6a:	a4 37       	cpi	r26, 0x74	; 116
+  6c:	b2 07       	cpc	r27, r18
+  6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
+  70:	0e 94 d2 02 	call	0x5a4	; 0x5a4 <main>
+  74:	0c 94 f2 02 	jmp	0x5e4	; 0x5e4 <_exit>
+
+00000078 <__bad_interrupt>:
+  78:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000007c <__vector_1>:
+ */
+
+
+void __vector_1 (void) __attribute__((signal));
+void __vector_1 (void)
+{
+  7c:	1f 92       	push	r1
+  7e:	0f 92       	push	r0
+  80:	0f b6       	in	r0, 0x3f	; 63
+  82:	0f 92       	push	r0
+  84:	11 24       	eor	r1, r1
+  86:	2f 93       	push	r18
+  88:	3f 93       	push	r19
+  8a:	4f 93       	push	r20
+  8c:	5f 93       	push	r21
+  8e:	6f 93       	push	r22
+  90:	7f 93       	push	r23
+  92:	8f 93       	push	r24
+  94:	9f 93       	push	r25
+  96:	af 93       	push	r26
+  98:	bf 93       	push	r27
+  9a:	ef 93       	push	r30
+  9c:	ff 93       	push	r31
+	//Call function
+	GP_IRQ_CALL[0]();
+  9e:	e0 91 68 00 	lds	r30, 0x0068	; 0x800068 <GP_IRQ_CALL>
+  a2:	f0 91 69 00 	lds	r31, 0x0069	; 0x800069 <GP_IRQ_CALL+0x1>
+  a6:	09 95       	icall
+}
+  a8:	ff 91       	pop	r31
+  aa:	ef 91       	pop	r30
+  ac:	bf 91       	pop	r27
+  ae:	af 91       	pop	r26
+  b0:	9f 91       	pop	r25
+  b2:	8f 91       	pop	r24
+  b4:	7f 91       	pop	r23
+  b6:	6f 91       	pop	r22
+  b8:	5f 91       	pop	r21
+  ba:	4f 91       	pop	r20
+  bc:	3f 91       	pop	r19
+  be:	2f 91       	pop	r18
+  c0:	0f 90       	pop	r0
+  c2:	0f be       	out	0x3f, r0	; 63
+  c4:	0f 90       	pop	r0
+  c6:	1f 90       	pop	r1
+  c8:	18 95       	reti
+
+000000ca <__vector_2>:
+
+
+void __vector_2 (void) __attribute__((signal));
+void __vector_2 (void)
+{
+  ca:	1f 92       	push	r1
+  cc:	0f 92       	push	r0
+  ce:	0f b6       	in	r0, 0x3f	; 63
+  d0:	0f 92       	push	r0
+  d2:	11 24       	eor	r1, r1
+  d4:	2f 93       	push	r18
+  d6:	3f 93       	push	r19
+  d8:	4f 93       	push	r20
+  da:	5f 93       	push	r21
+  dc:	6f 93       	push	r22
+  de:	7f 93       	push	r23
+  e0:	8f 93       	push	r24
+  e2:	9f 93       	push	r25
+  e4:	af 93       	push	r26
+  e6:	bf 93       	push	r27
+  e8:	ef 93       	push	r30
+  ea:	ff 93       	push	r31
+	//Call function
+	GP_IRQ_CALL[1]();
+  ec:	e0 91 6a 00 	lds	r30, 0x006A	; 0x80006a <GP_IRQ_CALL+0x2>
+  f0:	f0 91 6b 00 	lds	r31, 0x006B	; 0x80006b <GP_IRQ_CALL+0x3>
+  f4:	09 95       	icall
+}
+  f6:	ff 91       	pop	r31
+  f8:	ef 91       	pop	r30
+  fa:	bf 91       	pop	r27
+  fc:	af 91       	pop	r26
+  fe:	9f 91       	pop	r25
+ 100:	8f 91       	pop	r24
+ 102:	7f 91       	pop	r23
+ 104:	6f 91       	pop	r22
+ 106:	5f 91       	pop	r21
+ 108:	4f 91       	pop	r20
+ 10a:	3f 91       	pop	r19
+ 10c:	2f 91       	pop	r18
+ 10e:	0f 90       	pop	r0
+ 110:	0f be       	out	0x3f, r0	; 63
+ 112:	0f 90       	pop	r0
+ 114:	1f 90       	pop	r1
+ 116:	18 95       	reti
+
+00000118 <__vector_3>:
+
+
+void __vector_3 (void) __attribute__((signal));
+void __vector_3 (void)
+{
+ 118:	1f 92       	push	r1
+ 11a:	0f 92       	push	r0
+ 11c:	0f b6       	in	r0, 0x3f	; 63
+ 11e:	0f 92       	push	r0
+ 120:	11 24       	eor	r1, r1
+ 122:	2f 93       	push	r18
+ 124:	3f 93       	push	r19
+ 126:	4f 93       	push	r20
+ 128:	5f 93       	push	r21
+ 12a:	6f 93       	push	r22
+ 12c:	7f 93       	push	r23
+ 12e:	8f 93       	push	r24
+ 130:	9f 93       	push	r25
+ 132:	af 93       	push	r26
+ 134:	bf 93       	push	r27
+ 136:	ef 93       	push	r30
+ 138:	ff 93       	push	r31
+	//Call function
+	GP_IRQ_CALL[2]();
+ 13a:	e0 91 6c 00 	lds	r30, 0x006C	; 0x80006c <GP_IRQ_CALL+0x4>
+ 13e:	f0 91 6d 00 	lds	r31, 0x006D	; 0x80006d <GP_IRQ_CALL+0x5>
+ 142:	09 95       	icall
+}
+ 144:	ff 91       	pop	r31
+ 146:	ef 91       	pop	r30
+ 148:	bf 91       	pop	r27
+ 14a:	af 91       	pop	r26
+ 14c:	9f 91       	pop	r25
+ 14e:	8f 91       	pop	r24
+ 150:	7f 91       	pop	r23
+ 152:	6f 91       	pop	r22
+ 154:	5f 91       	pop	r21
+ 156:	4f 91       	pop	r20
+ 158:	3f 91       	pop	r19
+ 15a:	2f 91       	pop	r18
+ 15c:	0f 90       	pop	r0
+ 15e:	0f be       	out	0x3f, r0	; 63
+ 160:	0f 90       	pop	r0
+ 162:	1f 90       	pop	r1
+ 164:	18 95       	reti
+
+00000166 <MCAL_GPIO_Init>:
+* @retval 			-none
+* Note				-none
+*/
+void MCAL_GPIO_WritePort(GPIO_TypeDef *GPIOx ,uint8_t value)
+{
+	GPIOx->PORT=  value;
+ 166:	fc 01       	movw	r30, r24
+ 168:	db 01       	movw	r26, r22
+ 16a:	11 96       	adiw	r26, 0x01	; 1
+ 16c:	8c 91       	ld	r24, X
+ 16e:	11 97       	sbiw	r26, 0x01	; 1
+ 170:	81 30       	cpi	r24, 0x01	; 1
+ 172:	59 f4       	brne	.+22     	; 0x18a <MCAL_GPIO_Init+0x24>
+ 174:	8c 91       	ld	r24, X
+ 176:	80 95       	com	r24
+ 178:	91 81       	ldd	r25, Z+1	; 0x01
+ 17a:	89 23       	and	r24, r25
+ 17c:	81 83       	std	Z+1, r24	; 0x01
+ 17e:	8c 91       	ld	r24, X
+ 180:	80 95       	com	r24
+ 182:	92 81       	ldd	r25, Z+2	; 0x02
+ 184:	89 23       	and	r24, r25
+ 186:	82 83       	std	Z+2, r24	; 0x02
+ 188:	08 95       	ret
+ 18a:	82 30       	cpi	r24, 0x02	; 2
+ 18c:	51 f4       	brne	.+20     	; 0x1a2 <MCAL_GPIO_Init+0x3c>
+ 18e:	8c 91       	ld	r24, X
+ 190:	80 95       	com	r24
+ 192:	91 81       	ldd	r25, Z+1	; 0x01
+ 194:	89 23       	and	r24, r25
+ 196:	81 83       	std	Z+1, r24	; 0x01
+ 198:	8c 91       	ld	r24, X
+ 19a:	92 81       	ldd	r25, Z+2	; 0x02
+ 19c:	89 2b       	or	r24, r25
+ 19e:	82 83       	std	Z+2, r24	; 0x02
+ 1a0:	08 95       	ret
+ 1a2:	8c 91       	ld	r24, X
+ 1a4:	91 81       	ldd	r25, Z+1	; 0x01
+ 1a6:	89 2b       	or	r24, r25
+ 1a8:	81 83       	std	Z+1, r24	; 0x01
+ 1aa:	8c 91       	ld	r24, X
+ 1ac:	80 95       	com	r24
+ 1ae:	92 81       	ldd	r25, Z+2	; 0x02
+ 1b0:	89 23       	and	r24, r25
+ 1b2:	82 83       	std	Z+2, r24	; 0x02
+ 1b4:	08 95       	ret
+
+000001b6 <MCAL_GPIO_TogglePin>:
+* @retval 			-none
+* Note				-none
+*/
+void MCAL_GPIO_TogglePin(GPIO_TypeDef *GPIOx ,uint8_t pinNumber )
+{
+	GPIOx->PORT ^=pinNumber;
+ 1b6:	fc 01       	movw	r30, r24
+ 1b8:	22 81       	ldd	r18, Z+2	; 0x02
+ 1ba:	62 27       	eor	r22, r18
+ 1bc:	62 83       	std	Z+2, r22	; 0x02
+ 1be:	08 95       	ret
+
+000001c0 <__vector_19>:
+ */
+
+
+void __vector_19 (void) __attribute__((signal));
+void __vector_19 (void)
+{
+ 1c0:	1f 92       	push	r1
+ 1c2:	0f 92       	push	r0
+ 1c4:	0f b6       	in	r0, 0x3f	; 63
+ 1c6:	0f 92       	push	r0
+ 1c8:	11 24       	eor	r1, r1
+ 1ca:	2f 93       	push	r18
+ 1cc:	3f 93       	push	r19
+ 1ce:	4f 93       	push	r20
+ 1d0:	5f 93       	push	r21
+ 1d2:	6f 93       	push	r22
+ 1d4:	7f 93       	push	r23
+ 1d6:	8f 93       	push	r24
+ 1d8:	9f 93       	push	r25
+ 1da:	af 93       	push	r26
+ 1dc:	bf 93       	push	r27
+ 1de:	ef 93       	push	r30
+ 1e0:	ff 93       	push	r31
+	g_I2C_Config->P_IRQ_CALL() ;
+ 1e2:	e0 91 60 00 	lds	r30, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1e6:	f0 91 61 00 	lds	r31, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 1ea:	04 80       	ldd	r0, Z+4	; 0x04
+ 1ec:	f5 81       	ldd	r31, Z+5	; 0x05
+ 1ee:	e0 2d       	mov	r30, r0
+ 1f0:	09 95       	icall
+}
+ 1f2:	ff 91       	pop	r31
+ 1f4:	ef 91       	pop	r30
+ 1f6:	bf 91       	pop	r27
+ 1f8:	af 91       	pop	r26
+ 1fa:	9f 91       	pop	r25
+ 1fc:	8f 91       	pop	r24
+ 1fe:	7f 91       	pop	r23
+ 200:	6f 91       	pop	r22
+ 202:	5f 91       	pop	r21
+ 204:	4f 91       	pop	r20
+ 206:	3f 91       	pop	r19
+ 208:	2f 91       	pop	r18
+ 20a:	0f 90       	pop	r0
+ 20c:	0f be       	out	0x3f, r0	; 63
+ 20e:	0f 90       	pop	r0
+ 210:	1f 90       	pop	r1
+ 212:	18 95       	reti
+
+00000214 <__vector_9>:
+ * ===============================================================
+ */
+
+void __vector_9 (void) __attribute__((signal));
+void __vector_9 (void)
+{
+ 214:	1f 92       	push	r1
+ 216:	0f 92       	push	r0
+ 218:	0f b6       	in	r0, 0x3f	; 63
+ 21a:	0f 92       	push	r0
+ 21c:	11 24       	eor	r1, r1
+ 21e:	2f 93       	push	r18
+ 220:	3f 93       	push	r19
+ 222:	4f 93       	push	r20
+ 224:	5f 93       	push	r21
+ 226:	6f 93       	push	r22
+ 228:	7f 93       	push	r23
+ 22a:	8f 93       	push	r24
+ 22c:	9f 93       	push	r25
+ 22e:	af 93       	push	r26
+ 230:	bf 93       	push	r27
+ 232:	ef 93       	push	r30
+ 234:	ff 93       	push	r31
+	g_PWM_Config->P_TOIE1_CALL();
+ 236:	e0 91 62 00 	lds	r30, 0x0062	; 0x800062 <g_PWM_Config>
+ 23a:	f0 91 63 00 	lds	r31, 0x0063	; 0x800063 <g_PWM_Config+0x1>
+ 23e:	04 84       	ldd	r0, Z+12	; 0x0c
+ 240:	f5 85       	ldd	r31, Z+13	; 0x0d
+ 242:	e0 2d       	mov	r30, r0
+ 244:	09 95       	icall
+}
+ 246:	ff 91       	pop	r31
+ 248:	ef 91       	pop	r30
+ 24a:	bf 91       	pop	r27
+ 24c:	af 91       	pop	r26
+ 24e:	9f 91       	pop	r25
+ 250:	8f 91       	pop	r24
+ 252:	7f 91       	pop	r23
+ 254:	6f 91       	pop	r22
+ 256:	5f 91       	pop	r21
+ 258:	4f 91       	pop	r20
+ 25a:	3f 91       	pop	r19
+ 25c:	2f 91       	pop	r18
+ 25e:	0f 90       	pop	r0
+ 260:	0f be       	out	0x3f, r0	; 63
+ 262:	0f 90       	pop	r0
+ 264:	1f 90       	pop	r1
+ 266:	18 95       	reti
+
+00000268 <__vector_7>:
+
+void __vector_7 (void) __attribute__((signal));
+void __vector_7 (void)
+{
+ 268:	1f 92       	push	r1
+ 26a:	0f 92       	push	r0
+ 26c:	0f b6       	in	r0, 0x3f	; 63
+ 26e:	0f 92       	push	r0
+ 270:	11 24       	eor	r1, r1
+ 272:	2f 93       	push	r18
+ 274:	3f 93       	push	r19
+ 276:	4f 93       	push	r20
+ 278:	5f 93       	push	r21
+ 27a:	6f 93       	push	r22
+ 27c:	7f 93       	push	r23
+ 27e:	8f 93       	push	r24
+ 280:	9f 93       	push	r25
+ 282:	af 93       	push	r26
+ 284:	bf 93       	push	r27
+ 286:	ef 93       	push	r30
+ 288:	ff 93       	push	r31
+	g_PWM_Config->P_OCIE1A_CALL();
+ 28a:	e0 91 62 00 	lds	r30, 0x0062	; 0x800062 <g_PWM_Config>
+ 28e:	f0 91 63 00 	lds	r31, 0x0063	; 0x800063 <g_PWM_Config+0x1>
+ 292:	06 84       	ldd	r0, Z+14	; 0x0e
+ 294:	f7 85       	ldd	r31, Z+15	; 0x0f
+ 296:	e0 2d       	mov	r30, r0
+ 298:	09 95       	icall
+}
+ 29a:	ff 91       	pop	r31
+ 29c:	ef 91       	pop	r30
+ 29e:	bf 91       	pop	r27
+ 2a0:	af 91       	pop	r26
+ 2a2:	9f 91       	pop	r25
+ 2a4:	8f 91       	pop	r24
+ 2a6:	7f 91       	pop	r23
+ 2a8:	6f 91       	pop	r22
+ 2aa:	5f 91       	pop	r21
+ 2ac:	4f 91       	pop	r20
+ 2ae:	3f 91       	pop	r19
+ 2b0:	2f 91       	pop	r18
+ 2b2:	0f 90       	pop	r0
+ 2b4:	0f be       	out	0x3f, r0	; 63
+ 2b6:	0f 90       	pop	r0
+ 2b8:	1f 90       	pop	r1
+ 2ba:	18 95       	reti
+
+000002bc <__vector_8>:
+
+void __vector_8 (void) __attribute__((signal));
+void __vector_8 (void)
+{
+ 2bc:	1f 92       	push	r1
+ 2be:	0f 92       	push	r0
+ 2c0:	0f b6       	in	r0, 0x3f	; 63
+ 2c2:	0f 92       	push	r0
+ 2c4:	11 24       	eor	r1, r1
+ 2c6:	2f 93       	push	r18
+ 2c8:	3f 93       	push	r19
+ 2ca:	4f 93       	push	r20
+ 2cc:	5f 93       	push	r21
+ 2ce:	6f 93       	push	r22
+ 2d0:	7f 93       	push	r23
+ 2d2:	8f 93       	push	r24
+ 2d4:	9f 93       	push	r25
+ 2d6:	af 93       	push	r26
+ 2d8:	bf 93       	push	r27
+ 2da:	ef 93       	push	r30
+ 2dc:	ff 93       	push	r31
+	g_PWM_Config->P_OCIE1B_CALL();
+ 2de:	e0 91 62 00 	lds	r30, 0x0062	; 0x800062 <g_PWM_Config>
+ 2e2:	f0 91 63 00 	lds	r31, 0x0063	; 0x800063 <g_PWM_Config+0x1>
+ 2e6:	00 88       	ldd	r0, Z+16	; 0x10
+ 2e8:	f1 89       	ldd	r31, Z+17	; 0x11
+ 2ea:	e0 2d       	mov	r30, r0
+ 2ec:	09 95       	icall
+}
+ 2ee:	ff 91       	pop	r31
+ 2f0:	ef 91       	pop	r30
+ 2f2:	bf 91       	pop	r27
+ 2f4:	af 91       	pop	r26
+ 2f6:	9f 91       	pop	r25
+ 2f8:	8f 91       	pop	r24
+ 2fa:	7f 91       	pop	r23
+ 2fc:	6f 91       	pop	r22
+ 2fe:	5f 91       	pop	r21
+ 300:	4f 91       	pop	r20
+ 302:	3f 91       	pop	r19
+ 304:	2f 91       	pop	r18
+ 306:	0f 90       	pop	r0
+ 308:	0f be       	out	0x3f, r0	; 63
+ 30a:	0f 90       	pop	r0
+ 30c:	1f 90       	pop	r1
+ 30e:	18 95       	reti
+
+00000310 <__vector_12>:
+ */
+
+
+void __vector_12 (void) __attribute__((signal));
+void __vector_12 (void)
+{
+ 310:	1f 92       	push	r1
+ 312:	0f 92       	push	r0
+ 314:	0f b6       	in	r0, 0x3f	; 63
+ 316:	0f 92       	push	r0
+ 318:	11 24       	eor	r1, r1
+ 31a:	2f 93       	push	r18
+ 31c:	3f 93       	push	r19
+ 31e:	4f 93       	push	r20
+ 320:	5f 93       	push	r21
+ 322:	6f 93       	push	r22
+ 324:	7f 93       	push	r23
+ 326:	8f 93       	push	r24
+ 328:	9f 93       	push	r25
+ 32a:	af 93       	push	r26
+ 32c:	bf 93       	push	r27
+ 32e:	ef 93       	push	r30
+ 330:	ff 93       	push	r31
+	g_SPI_Config->P_IRQ_CALL() ;
+ 332:	e0 91 64 00 	lds	r30, 0x0064	; 0x800064 <g_SPI_Config>
+ 336:	f0 91 65 00 	lds	r31, 0x0065	; 0x800065 <g_SPI_Config+0x1>
+ 33a:	07 80       	ldd	r0, Z+7	; 0x07
+ 33c:	f0 85       	ldd	r31, Z+8	; 0x08
+ 33e:	e0 2d       	mov	r30, r0
+ 340:	09 95       	icall
+}
+ 342:	ff 91       	pop	r31
+ 344:	ef 91       	pop	r30
+ 346:	bf 91       	pop	r27
+ 348:	af 91       	pop	r26
+ 34a:	9f 91       	pop	r25
+ 34c:	8f 91       	pop	r24
+ 34e:	7f 91       	pop	r23
+ 350:	6f 91       	pop	r22
+ 352:	5f 91       	pop	r21
+ 354:	4f 91       	pop	r20
+ 356:	3f 91       	pop	r19
+ 358:	2f 91       	pop	r18
+ 35a:	0f 90       	pop	r0
+ 35c:	0f be       	out	0x3f, r0	; 63
+ 35e:	0f 90       	pop	r0
+ 360:	1f 90       	pop	r1
+ 362:	18 95       	reti
+
+00000364 <MCAL_TIMER0_Init>:
+* Note				-Support Normal mode and CTC
+*/
+uint8_t MCAL_TIMER0_Read_Counter_Value() 
+{
+	return TCNT0 ;
+}
+ 364:	ff 92       	push	r15
+ 366:	0f 93       	push	r16
+ 368:	1f 93       	push	r17
+ 36a:	cf 93       	push	r28
+ 36c:	df 93       	push	r29
+ 36e:	00 d0       	rcall	.+0      	; 0x370 <MCAL_TIMER0_Init+0xc>
+ 370:	cd b7       	in	r28, 0x3d	; 61
+ 372:	de b7       	in	r29, 0x3e	; 62
+ 374:	8c 01       	movw	r16, r24
+ 376:	90 93 67 00 	sts	0x0067, r25	; 0x800067 <g_TIM0_Config+0x1>
+ 37a:	80 93 66 00 	sts	0x0066, r24	; 0x800066 <g_TIM0_Config>
+ 37e:	fc 01       	movw	r30, r24
+ 380:	f0 80       	ld	r15, Z
+ 382:	82 81       	ldd	r24, Z+2	; 0x02
+ 384:	f8 2a       	or	r15, r24
+ 386:	81 81       	ldd	r24, Z+1	; 0x01
+ 388:	88 23       	and	r24, r24
+ 38a:	61 f0       	breq	.+24     	; 0x3a4 <MCAL_TIMER0_Init+0x40>
+ 38c:	f8 2a       	or	r15, r24
+ 38e:	88 e0       	ldi	r24, 0x08	; 8
+ 390:	89 83       	std	Y+1, r24	; 0x01
+ 392:	83 e0       	ldi	r24, 0x03	; 3
+ 394:	8a 83       	std	Y+2, r24	; 0x02
+ 396:	be 01       	movw	r22, r28
+ 398:	6f 5f       	subi	r22, 0xFF	; 255
+ 39a:	7f 4f       	sbci	r23, 0xFF	; 255
+ 39c:	86 e3       	ldi	r24, 0x36	; 54
+ 39e:	90 e0       	ldi	r25, 0x00	; 0
+ 3a0:	0e 94 b3 00 	call	0x166	; 0x166 <MCAL_GPIO_Init>
+ 3a4:	f8 01       	movw	r30, r16
+ 3a6:	94 81       	ldd	r25, Z+4	; 0x04
+ 3a8:	83 81       	ldd	r24, Z+3	; 0x03
+ 3aa:	89 2b       	or	r24, r25
+ 3ac:	95 81       	ldd	r25, Z+5	; 0x05
+ 3ae:	9c bf       	out	0x3c, r25	; 60
+ 3b0:	94 81       	ldd	r25, Z+4	; 0x04
+ 3b2:	91 30       	cpi	r25, 0x01	; 1
+ 3b4:	39 f4       	brne	.+14     	; 0x3c4 <MCAL_TIMER0_Init+0x60>
+ 3b6:	99 b7       	in	r25, 0x39	; 57
+ 3b8:	91 60       	ori	r25, 0x01	; 1
+ 3ba:	99 bf       	out	0x39, r25	; 57
+ 3bc:	9f b7       	in	r25, 0x3f	; 63
+ 3be:	90 68       	ori	r25, 0x80	; 128
+ 3c0:	9f bf       	out	0x3f, r25	; 63
+ 3c2:	06 c0       	rjmp	.+12     	; 0x3d0 <MCAL_TIMER0_Init+0x6c>
+ 3c4:	99 b7       	in	r25, 0x39	; 57
+ 3c6:	9e 7f       	andi	r25, 0xFE	; 254
+ 3c8:	99 bf       	out	0x39, r25	; 57
+ 3ca:	9f b7       	in	r25, 0x3f	; 63
+ 3cc:	9f 77       	andi	r25, 0x7F	; 127
+ 3ce:	9f bf       	out	0x3f, r25	; 63
+ 3d0:	f8 01       	movw	r30, r16
+ 3d2:	93 81       	ldd	r25, Z+3	; 0x03
+ 3d4:	91 30       	cpi	r25, 0x01	; 1
+ 3d6:	39 f4       	brne	.+14     	; 0x3e6 <MCAL_TIMER0_Init+0x82>
+ 3d8:	99 b7       	in	r25, 0x39	; 57
+ 3da:	92 60       	ori	r25, 0x02	; 2
+ 3dc:	99 bf       	out	0x39, r25	; 57
+ 3de:	9f b7       	in	r25, 0x3f	; 63
+ 3e0:	90 68       	ori	r25, 0x80	; 128
+ 3e2:	9f bf       	out	0x3f, r25	; 63
+ 3e4:	06 c0       	rjmp	.+12     	; 0x3f2 <MCAL_TIMER0_Init+0x8e>
+ 3e6:	99 b7       	in	r25, 0x39	; 57
+ 3e8:	9d 7f       	andi	r25, 0xFD	; 253
+ 3ea:	99 bf       	out	0x39, r25	; 57
+ 3ec:	9f b7       	in	r25, 0x3f	; 63
+ 3ee:	9f 77       	andi	r25, 0x7F	; 127
+ 3f0:	9f bf       	out	0x3f, r25	; 63
+ 3f2:	f3 be       	out	0x33, r15	; 51
+ 3f4:	89 bf       	out	0x39, r24	; 57
+ 3f6:	0f 90       	pop	r0
+ 3f8:	0f 90       	pop	r0
+ 3fa:	df 91       	pop	r29
+ 3fc:	cf 91       	pop	r28
+ 3fe:	1f 91       	pop	r17
+ 400:	0f 91       	pop	r16
+ 402:	ff 90       	pop	r15
+ 404:	08 95       	ret
+
+00000406 <__vector_10>:
+ * ===============================================================
+ */
+
+void __vector_10 (void) __attribute__((signal));
+void __vector_10 (void)
+{
+ 406:	1f 92       	push	r1
+ 408:	0f 92       	push	r0
+ 40a:	0f b6       	in	r0, 0x3f	; 63
+ 40c:	0f 92       	push	r0
+ 40e:	11 24       	eor	r1, r1
+ 410:	2f 93       	push	r18
+ 412:	3f 93       	push	r19
+ 414:	4f 93       	push	r20
+ 416:	5f 93       	push	r21
+ 418:	6f 93       	push	r22
+ 41a:	7f 93       	push	r23
+ 41c:	8f 93       	push	r24
+ 41e:	9f 93       	push	r25
+ 420:	af 93       	push	r26
+ 422:	bf 93       	push	r27
+ 424:	ef 93       	push	r30
+ 426:	ff 93       	push	r31
+	g_TIM0_Config->P_OCIE0_CALL();
+ 428:	e0 91 66 00 	lds	r30, 0x0066	; 0x800066 <g_TIM0_Config>
+ 42c:	f0 91 67 00 	lds	r31, 0x0067	; 0x800067 <g_TIM0_Config+0x1>
+ 430:	00 84       	ldd	r0, Z+8	; 0x08
+ 432:	f1 85       	ldd	r31, Z+9	; 0x09
+ 434:	e0 2d       	mov	r30, r0
+ 436:	09 95       	icall
+}
+ 438:	ff 91       	pop	r31
+ 43a:	ef 91       	pop	r30
+ 43c:	bf 91       	pop	r27
+ 43e:	af 91       	pop	r26
+ 440:	9f 91       	pop	r25
+ 442:	8f 91       	pop	r24
+ 444:	7f 91       	pop	r23
+ 446:	6f 91       	pop	r22
+ 448:	5f 91       	pop	r21
+ 44a:	4f 91       	pop	r20
+ 44c:	3f 91       	pop	r19
+ 44e:	2f 91       	pop	r18
+ 450:	0f 90       	pop	r0
+ 452:	0f be       	out	0x3f, r0	; 63
+ 454:	0f 90       	pop	r0
+ 456:	1f 90       	pop	r1
+ 458:	18 95       	reti
+
+0000045a <__vector_11>:
+
+void __vector_11 (void) __attribute__((signal));
+void __vector_11 (void)
+{
+ 45a:	1f 92       	push	r1
+ 45c:	0f 92       	push	r0
+ 45e:	0f b6       	in	r0, 0x3f	; 63
+ 460:	0f 92       	push	r0
+ 462:	11 24       	eor	r1, r1
+ 464:	2f 93       	push	r18
+ 466:	3f 93       	push	r19
+ 468:	4f 93       	push	r20
+ 46a:	5f 93       	push	r21
+ 46c:	6f 93       	push	r22
+ 46e:	7f 93       	push	r23
+ 470:	8f 93       	push	r24
+ 472:	9f 93       	push	r25
+ 474:	af 93       	push	r26
+ 476:	bf 93       	push	r27
+ 478:	ef 93       	push	r30
+ 47a:	ff 93       	push	r31
+	g_TIM0_Config->P_TOIE0_CALL();
+ 47c:	e0 91 66 00 	lds	r30, 0x0066	; 0x800066 <g_TIM0_Config>
+ 480:	f0 91 67 00 	lds	r31, 0x0067	; 0x800067 <g_TIM0_Config+0x1>
+ 484:	06 80       	ldd	r0, Z+6	; 0x06
+ 486:	f7 81       	ldd	r31, Z+7	; 0x07
+ 488:	e0 2d       	mov	r30, r0
+ 48a:	09 95       	icall
+}
+ 48c:	ff 91       	pop	r31
+ 48e:	ef 91       	pop	r30
+ 490:	bf 91       	pop	r27
+ 492:	af 91       	pop	r26
+ 494:	9f 91       	pop	r25
+ 496:	8f 91       	pop	r24
+ 498:	7f 91       	pop	r23
+ 49a:	6f 91       	pop	r22
+ 49c:	5f 91       	pop	r21
+ 49e:	4f 91       	pop	r20
+ 4a0:	3f 91       	pop	r19
+ 4a2:	2f 91       	pop	r18
+ 4a4:	0f 90       	pop	r0
+ 4a6:	0f be       	out	0x3f, r0	; 63
+ 4a8:	0f 90       	pop	r0
+ 4aa:	1f 90       	pop	r1
+ 4ac:	18 95       	reti
+
+000004ae <__vector_13>:
+ *
+ * ===============================================================
+ */
+void __vector_13 (void) __attribute__((signal));
+void __vector_13 (void)
+{
+ 4ae:	1f 92       	push	r1
+ 4b0:	0f 92       	push	r0
+ 4b2:	0f b6       	in	r0, 0x3f	; 63
+ 4b4:	0f 92       	push	r0
+ 4b6:	11 24       	eor	r1, r1
+ 4b8:	2f 93       	push	r18
+ 4ba:	3f 93       	push	r19
+ 4bc:	4f 93       	push	r20
+ 4be:	5f 93       	push	r21
+ 4c0:	6f 93       	push	r22
+ 4c2:	7f 93       	push	r23
+ 4c4:	8f 93       	push	r24
+ 4c6:	9f 93       	push	r25
+ 4c8:	af 93       	push	r26
+ 4ca:	bf 93       	push	r27
+ 4cc:	ef 93       	push	r30
+ 4ce:	ff 93       	push	r31
+	//Call function
+	GPU_IRQ_CALL[2]();
+ 4d0:	e0 91 72 00 	lds	r30, 0x0072	; 0x800072 <GPU_IRQ_CALL+0x4>
+ 4d4:	f0 91 73 00 	lds	r31, 0x0073	; 0x800073 <GPU_IRQ_CALL+0x5>
+ 4d8:	09 95       	icall
+}
+ 4da:	ff 91       	pop	r31
+ 4dc:	ef 91       	pop	r30
+ 4de:	bf 91       	pop	r27
+ 4e0:	af 91       	pop	r26
+ 4e2:	9f 91       	pop	r25
+ 4e4:	8f 91       	pop	r24
+ 4e6:	7f 91       	pop	r23
+ 4e8:	6f 91       	pop	r22
+ 4ea:	5f 91       	pop	r21
+ 4ec:	4f 91       	pop	r20
+ 4ee:	3f 91       	pop	r19
+ 4f0:	2f 91       	pop	r18
+ 4f2:	0f 90       	pop	r0
+ 4f4:	0f be       	out	0x3f, r0	; 63
+ 4f6:	0f 90       	pop	r0
+ 4f8:	1f 90       	pop	r1
+ 4fa:	18 95       	reti
+
+000004fc <__vector_14>:
+
+void __vector_14 (void) __attribute__((signal));
+void __vector_14 (void)
+{
+ 4fc:	1f 92       	push	r1
+ 4fe:	0f 92       	push	r0
+ 500:	0f b6       	in	r0, 0x3f	; 63
+ 502:	0f 92       	push	r0
+ 504:	11 24       	eor	r1, r1
+ 506:	2f 93       	push	r18
+ 508:	3f 93       	push	r19
+ 50a:	4f 93       	push	r20
+ 50c:	5f 93       	push	r21
+ 50e:	6f 93       	push	r22
+ 510:	7f 93       	push	r23
+ 512:	8f 93       	push	r24
+ 514:	9f 93       	push	r25
+ 516:	af 93       	push	r26
+ 518:	bf 93       	push	r27
+ 51a:	ef 93       	push	r30
+ 51c:	ff 93       	push	r31
+	//Call function
+	GPU_IRQ_CALL[1]();
+ 51e:	e0 91 70 00 	lds	r30, 0x0070	; 0x800070 <GPU_IRQ_CALL+0x2>
+ 522:	f0 91 71 00 	lds	r31, 0x0071	; 0x800071 <GPU_IRQ_CALL+0x3>
+ 526:	09 95       	icall
+}
+ 528:	ff 91       	pop	r31
+ 52a:	ef 91       	pop	r30
+ 52c:	bf 91       	pop	r27
+ 52e:	af 91       	pop	r26
+ 530:	9f 91       	pop	r25
+ 532:	8f 91       	pop	r24
+ 534:	7f 91       	pop	r23
+ 536:	6f 91       	pop	r22
+ 538:	5f 91       	pop	r21
+ 53a:	4f 91       	pop	r20
+ 53c:	3f 91       	pop	r19
+ 53e:	2f 91       	pop	r18
+ 540:	0f 90       	pop	r0
+ 542:	0f be       	out	0x3f, r0	; 63
+ 544:	0f 90       	pop	r0
+ 546:	1f 90       	pop	r1
+ 548:	18 95       	reti
+
+0000054a <__vector_15>:
+
+void __vector_15 (void) __attribute__((signal));
+void __vector_15 (void)
+{
+ 54a:	1f 92       	push	r1
+ 54c:	0f 92       	push	r0
+ 54e:	0f b6       	in	r0, 0x3f	; 63
+ 550:	0f 92       	push	r0
+ 552:	11 24       	eor	r1, r1
+ 554:	2f 93       	push	r18
+ 556:	3f 93       	push	r19
+ 558:	4f 93       	push	r20
+ 55a:	5f 93       	push	r21
+ 55c:	6f 93       	push	r22
+ 55e:	7f 93       	push	r23
+ 560:	8f 93       	push	r24
+ 562:	9f 93       	push	r25
+ 564:	af 93       	push	r26
+ 566:	bf 93       	push	r27
+ 568:	ef 93       	push	r30
+ 56a:	ff 93       	push	r31
+	//Call function
+	GPU_IRQ_CALL[0]();
+ 56c:	e0 91 6e 00 	lds	r30, 0x006E	; 0x80006e <GPU_IRQ_CALL>
+ 570:	f0 91 6f 00 	lds	r31, 0x006F	; 0x80006f <GPU_IRQ_CALL+0x1>
+ 574:	09 95       	icall
+}
+ 576:	ff 91       	pop	r31
+ 578:	ef 91       	pop	r30
+ 57a:	bf 91       	pop	r27
+ 57c:	af 91       	pop	r26
+ 57e:	9f 91       	pop	r25
+ 580:	8f 91       	pop	r24
+ 582:	7f 91       	pop	r23
+ 584:	6f 91       	pop	r22
+ 586:	5f 91       	pop	r21
+ 588:	4f 91       	pop	r20
+ 58a:	3f 91       	pop	r19
+ 58c:	2f 91       	pop	r18
+ 58e:	0f 90       	pop	r0
+ 590:	0f be       	out	0x3f, r0	; 63
+ 592:	0f 90       	pop	r0
+ 594:	1f 90       	pop	r1
+ 596:	18 95       	reti
+
+00000598 <TIMER0_CALL>:
+#include "Servo_Motor.h"
+
+
+void TIMER0_CALL(void)
+{
+	MCAL_GPIO_TogglePin(GPIOA , GPIO_PIN_0 );
+ 598:	61 e0       	ldi	r22, 0x01	; 1
+ 59a:	89 e3       	ldi	r24, 0x39	; 57
+ 59c:	90 e0       	ldi	r25, 0x00	; 0
+ 59e:	0e 94 db 00 	call	0x1b6	; 0x1b6 <MCAL_GPIO_TogglePin>
+ 5a2:	08 95       	ret
+
+000005a4 <main>:
+}
+int main(void)
+{	
+ 5a4:	cf 93       	push	r28
+ 5a6:	df 93       	push	r29
+ 5a8:	cd b7       	in	r28, 0x3d	; 61
+ 5aa:	de b7       	in	r29, 0x3e	; 62
+ 5ac:	2a 97       	sbiw	r28, 0x0a	; 10
+ 5ae:	0f b6       	in	r0, 0x3f	; 63
+ 5b0:	f8 94       	cli
+ 5b2:	de bf       	out	0x3e, r29	; 62
+ 5b4:	0f be       	out	0x3f, r0	; 63
+ 5b6:	cd bf       	out	0x3d, r28	; 61
+	TIMER0_config_t TIMER0_Config ;
+	TIMER0_Config.Clock_Source = TIMER0_Clock_Source_clk_1024 ;
+ 5b8:	85 e0       	ldi	r24, 0x05	; 5
+ 5ba:	8b 83       	std	Y+3, r24	; 0x03
+	TIMER0_Config.Compare_Value =255 ;
+ 5bc:	8f ef       	ldi	r24, 0xFF	; 255
+ 5be:	8e 83       	std	Y+6, r24	; 0x06
+	TIMER0_Config.OCIE0_EN = TIMER0_OCIE0_ENABLE_Disable;
+ 5c0:	1c 82       	std	Y+4, r1	; 0x04
+	TIMER0_Config.Output_Compare_pin = TIMER0_Output_Compare_pin_Toggle ;
+ 5c2:	80 e1       	ldi	r24, 0x10	; 16
+ 5c4:	8a 83       	std	Y+2, r24	; 0x02
+	TIMER0_Config.P_OCIE0_CALL = NULL ;
+ 5c6:	1a 86       	std	Y+10, r1	; 0x0a
+ 5c8:	19 86       	std	Y+9, r1	; 0x09
+	TIMER0_Config.P_TOIE0_CALL = TIMER0_CALL ;
+ 5ca:	8c ec       	ldi	r24, 0xCC	; 204
+ 5cc:	92 e0       	ldi	r25, 0x02	; 2
+ 5ce:	98 87       	std	Y+8, r25	; 0x08
+ 5d0:	8f 83       	std	Y+7, r24	; 0x07
+	TIMER0_Config.Timer0_Mode = TIMER0_MODE_CTC ;
+ 5d2:	80 e4       	ldi	r24, 0x40	; 64
+ 5d4:	89 83       	std	Y+1, r24	; 0x01
+	TIMER0_Config.TOIE0_EN = TIMER0_TOIE0_ENABLE_Enable ;
+ 5d6:	81 e0       	ldi	r24, 0x01	; 1
+ 5d8:	8d 83       	std	Y+5, r24	; 0x05
+	MCAL_TIMER0_Init(&TIMER0_Config) ;
+ 5da:	ce 01       	movw	r24, r28
+ 5dc:	01 96       	adiw	r24, 0x01	; 1
+ 5de:	0e 94 b2 01 	call	0x364	; 0x364 <MCAL_TIMER0_Init>
+ 5e2:	ff cf       	rjmp	.-2      	; 0x5e2 <main+0x3e>
+
+000005e4 <_exit>:
+ 5e4:	f8 94       	cli
+
+000005e6 <__stop_program>:
+ 5e6:	ff cf       	rjmp	.-2      	; 0x5e6 <__stop_program>
