@@ -93,7 +93,7 @@ Discarded input sections
                 0x00000000       0x48 LCD/LCD.o
  .debug_ranges  0x00000000       0x38 LCD/LCD.o
  .debug_line    0x00000000      0x37c LCD/LCD.o
- .debug_str     0x00000000      0x286 LCD/LCD.o
+ .debug_str     0x00000000      0x2d3 LCD/LCD.o
  .comment       0x00000000       0x31 LCD/LCD.o
  .debug_frame   0x00000000       0xac LCD/LCD.o
  .text          0x00000000        0x0 main.o
@@ -646,17 +646,17 @@ END GROUP
  .debug_frame   0x000001dc      0x1b8 ATMEGA32_Driver/USART_Driver.o
  .debug_frame   0x00000394       0x44 main.o
 
-.debug_str      0x00000000      0x63f
+.debug_str      0x00000000      0x68c
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_str     0x00000196      0x230 ATMEGA32_Driver/EXTI_Driver.o
-                                0x26f (size before relaxing)
- .debug_str     0x000003c6       0xb6 ATMEGA32_Driver/GPIO_Driver.o
-                                0x247 (size before relaxing)
- .debug_str     0x0000047c      0x1a2 ATMEGA32_Driver/USART_Driver.o
-                                0x366 (size before relaxing)
- .debug_str     0x0000061e       0x21 main.o
-                                0x258 (size before relaxing)
+ .debug_str     0x00000196      0x27d ATMEGA32_Driver/EXTI_Driver.o
+                                0x2bc (size before relaxing)
+ .debug_str     0x00000413       0xb6 ATMEGA32_Driver/GPIO_Driver.o
+                                0x294 (size before relaxing)
+ .debug_str     0x000004c9      0x1a2 ATMEGA32_Driver/USART_Driver.o
+                                0x3b3 (size before relaxing)
+ .debug_str     0x0000066b       0x21 main.o
+                                0x2a5 (size before relaxing)
 
 .debug_loc      0x00000000      0x8da
  *(.debug_loc)

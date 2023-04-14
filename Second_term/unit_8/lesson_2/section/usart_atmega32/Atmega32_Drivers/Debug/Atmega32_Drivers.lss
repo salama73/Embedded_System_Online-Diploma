@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  000003d8  00000000  00000000  000032c0  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000063f  00000000  00000000  00003698  2**0
+ 10 .debug_str    0000068c  00000000  00000000  00003698  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000008da  00000000  00000000  00003cd7  2**0
+ 11 .debug_loc    000008da  00000000  00000000  00003d24  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000d8  00000000  00000000  000045b1  2**0
+ 12 .debug_ranges 000000d8  00000000  00000000  000045fe  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -932,7 +932,7 @@ void __vector_15 (void)
  6c2:	18 95       	reti
 
 000006c4 <USART_init>:
- char DATA[100]  ;
+ char DATA[100] ;
 
 
 
@@ -1003,7 +1003,7 @@ int main(void)
  718:	8e e6       	ldi	r24, 0x6E	; 110
  71a:	90 e0       	ldi	r25, 0x00	; 0
  71c:	0e 94 d2 02 	call	0x5a4	; 0x5a4 <MCAL_USART_Receive_String>
-		MCAL_USART_Send_String( &DATA , Enable);
+		MCAL_USART_Send_String(&DATA , Enable);
  720:	60 e0       	ldi	r22, 0x00	; 0
  722:	8e e6       	ldi	r24, 0x6E	; 110
  724:	90 e0       	ldi	r25, 0x00	; 0

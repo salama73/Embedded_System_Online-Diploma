@@ -11,7 +11,7 @@
 #include "LCD.h"
 #include "USART_Driver.h"
 
- char DATA[100]  ;
+ char DATA[100] ;
 
 
 
@@ -38,7 +38,7 @@ int main(void)
     while (1) 
     {
 		MCAL_USART_Receive_String( &DATA , Enable ) ;
-		MCAL_USART_Send_String( &DATA , Enable);
+		MCAL_USART_Send_String(&DATA , Enable);
     }
 }
 
