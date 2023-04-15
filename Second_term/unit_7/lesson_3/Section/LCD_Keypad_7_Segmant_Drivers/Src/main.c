@@ -99,7 +99,8 @@ int main(void)
 {
 
 	Clock_INIT();
-	GPIO_INIT();
+
+	//GPIO_INIT();
 	LCD_init();
 	LCD_String("HI");
 	delay(30);
