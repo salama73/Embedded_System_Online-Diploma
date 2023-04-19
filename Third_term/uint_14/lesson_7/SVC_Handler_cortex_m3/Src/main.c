@@ -109,7 +109,7 @@ __attribute((naked)) void SVC_Handler (void)
 
 void PendSV_Handler()
 {
-    SCB->ICSR|=SCB_ICSR_PENDSVCLR_Msk; //clear pendsv
+    SCB->ICSR|=SCB_ICSR_PENDSVCLR_Msk; //Clear pendsv
 }
 /*
  **************************************************************
