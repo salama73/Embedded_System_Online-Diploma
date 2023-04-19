@@ -106,6 +106,11 @@ __attribute((naked)) void SVC_Handler (void)
     		"MRSNE R0,PSP\n\t"
     		"B OS_SV");
 }
+
+void PendSV_Handler()
+{
+    SCB->ICSR|=SCB_ICSR_PENDSVCLR_Msk; //clear pendsv
+}
 /*
  **************************************************************
  *************************OS***********************************
@@ -125,6 +130,9 @@ int OS_SVC_Set(int a,int b,int id)
 	case 2:
 		__asm("SVC #0x02");
 		break;
+    case 3:
+        __asm("SVC #0x03");
+        break;
 	}
 	__asm("MOV %[OUT],R0":[OUT] "=r" (return_val));
 	return return_val;
@@ -149,6 +157,9 @@ void OS_SV(int* Stack_Frame)
 	case 2:
 		Stack_Frame[0]=Val1*Val2;
 		break;
+    case 3:
+        SCB->ICSR|=SCB_ICSR_PENDSVSET_Msk;
+        break;
 	}
 }
 /*
@@ -163,6 +174,7 @@ int main(void)
     result=OS_SVC_Set(3,2,0);
     result=OS_SVC_Set(3,2,1);
     result=OS_SVC_Set(3,2,2);
+    result=OS_SVC_Set(3,2,3);//pendSV
     while (1)
     {
 
