@@ -1,0 +1,33 @@
+﻿/*@!Encoding:65001*/
+includes
+{
+  
+}
+
+variables
+{
+  msTimer Timer_Send;
+  const int Timer_Time=1000;
+  message ACC_CMD_Message ACC_CMD;
+  int ACC=0;
+}
+
+on start
+{
+  write("Eng:Salama : Case_Study_4 Learn in depth");
+  setTimer(Timer_Send,Timer_Time);
+}
+
+on message Speed_Val_Message
+{
+  write("ECU1 Recieved from ECU2");
+}
+
+on timer Timer_Send
+{
+  write("Eng:Salama : Case_Study_4 Learn in depth");
+  ACC =@sysvar::ACC_System;
+  ACC_CMD.ACC_ON_OFF.phys=ACC;
+  output(ACC_CMD);
+  setTimer(Timer_Send,Timer_Time);
+}
